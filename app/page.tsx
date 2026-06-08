@@ -8,6 +8,7 @@ import { RatingBadge } from "@/components/site/rating-badge";
 import { Umzugsrechner } from "@/components/site/umzugsrechner";
 import { TrustBar } from "@/components/site/trust-bar";
 import { WhyDifferent } from "@/components/site/why-different";
+import { AboutJafari } from "@/components/site/about-jafari";
 import { ServiceGrid } from "@/components/site/service-grid";
 import { WhatsAppCta } from "@/components/site/whatsapp-cta";
 import { FaqSection } from "@/components/site/faq-section";
@@ -20,7 +21,6 @@ import { WhatsAppButton } from "@/components/site/whatsapp-button";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { SplitReveal } from "@/components/anim/split-reveal";
-import { Reveal } from "@/components/anim/reveal";
 import { JsonLd } from "@/components/seo/json-ld";
 import { faqSchema } from "@/lib/seo/schema";
 import { services, steps, faqs } from "@/lib/content";
@@ -72,7 +72,9 @@ export default function HomePage() {
           </div>
 
           {/* Festpreis-Rechner – der zentrale Conversion-Motor */}
-          <Umzugsrechner />
+          <div id="rechner" className="scroll-mt-28">
+            <Umzugsrechner />
+          </div>
         </Container>
       </section>
 
@@ -81,10 +83,13 @@ export default function HomePage() {
         <TrustBar />
       </Container>
 
-      {/* ---------------- SO MACHT JAFARI ES ANDERS ---------------- */}
+      {/* ---------------- SO MACHT JAFARI ES ANDERS (dunkles Band) ---------------- */}
       <WhyDifferent />
 
-      {/* ---------------- ABLAUF ---------------- */}
+      {/* ---------------- ÜBER JAFARI (Foto + Siegel) ---------------- */}
+      <AboutJafari />
+
+      {/* ---------------- ABLAUF (Routen-Timeline) ---------------- */}
       <section id="ablauf" className="scroll-mt-24 bg-paper-dim py-20 lg:py-28">
         <Container>
           <SectionHeading
@@ -93,23 +98,42 @@ export default function HomePage() {
             title="In vier Schritten zum stressfreien Umzug"
             sub="Strukturiert, transparent und zuverlässig – Sie wissen jederzeit, was als Nächstes passiert."
           />
-          <Reveal as="ol" stagger={0.1} className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="relative mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {/* Routen-Linie (Desktop) */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-7 hidden border-t-2 border-dashed border-accent/30 lg:block"
+            />
             {steps.map((s, i) => (
               <li
                 key={s.title}
-                className="flex flex-col gap-3 rounded-card border border-line bg-white p-6 shadow-soft"
+                className="relative flex flex-col items-center gap-3 text-center lg:items-start lg:text-left"
               >
-                <div className="flex items-center justify-between">
-                  <span className="grid size-11 place-items-center rounded-xl bg-accent text-white">
-                    <Icon name={s.icon} className="size-5" />
-                  </span>
-                  <span className="font-display text-4xl font-bold text-accent/15">{i + 1}</span>
-                </div>
+                <span className="relative z-10 grid size-14 place-items-center rounded-full border-4 border-paper-dim bg-ink font-display text-xl font-bold text-white shadow-soft">
+                  {i + 1}
+                </span>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent">
+                  <Icon name={s.icon} className="size-4" />
+                </span>
                 <h3 className="font-display text-lg font-semibold text-ink">{s.title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{s.text}</p>
               </li>
             ))}
-          </Reveal>
+          </ol>
+          <div className="mt-14 flex flex-col items-center gap-4 text-center">
+            <p className="font-display text-xl font-semibold text-ink">
+              Fertig – zuverlässig, strukturiert und ohne unnötigen Aufwand.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <CallButton />
+              <Button asChild variant="outline" size="lg">
+                <Link href="/#kontakt">
+                  Online Anfrage stellen
+                  <ArrowRight className="size-5" />
+                </Link>
+              </Button>
+            </div>
+          </div>
         </Container>
       </section>
 
@@ -148,6 +172,20 @@ export default function HomePage() {
         <div className="mt-12">
           <TestimonialMarquee />
         </div>
+        <Container className="mt-12 flex flex-col items-center gap-4 text-center">
+          <p className="font-display text-xl font-semibold text-ink">
+            Werden Sie unser nächster zufriedener Kunde.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button asChild variant="signal" size="lg">
+              <Link href="/#rechner">
+                Festpreis berechnen
+                <ArrowRight className="size-5" />
+              </Link>
+            </Button>
+            <CallButton variant="outline" />
+          </div>
+        </Container>
       </section>
 
       {/* ---------------- EINSATZGEBIETE ---------------- */}
@@ -180,7 +218,10 @@ export default function HomePage() {
               Ihre Frage steht hier nicht? Rufen Sie uns an oder schreiben Sie per WhatsApp – wir
               helfen Ihnen gern weiter.
             </p>
-            <CallButton className="self-start" />
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <CallButton className="self-start" />
+              <WhatsAppButton variant="whatsapp" />
+            </div>
           </div>
           <FaqSection items={faqs} />
         </Container>

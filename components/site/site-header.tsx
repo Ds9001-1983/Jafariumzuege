@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "./logo";
 import { CallButton } from "./call-button";
 import { WhatsAppButton } from "./whatsapp-button";
+import { Button } from "@/components/ui/button";
 import { business } from "@/lib/business";
 import { cn } from "@/lib/utils";
 
@@ -87,18 +88,21 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-4 lg:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <a
             href={business.phone.href}
             data-call-cta
             className={cn(
-              "text-sm font-semibold transition-colors",
+              "hidden text-sm font-semibold transition-colors xl:inline",
               light ? "text-white hover:text-signal" : "text-ink hover:text-signal-deep",
             )}
           >
             {business.phone.display}
           </a>
           <CallButton size="sm" showNumber={false} label="Anrufen" />
+          <Button asChild variant={light ? "outlineLight" : "accent"} size="sm">
+            <Link href="/#kontakt">Angebot</Link>
+          </Button>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
