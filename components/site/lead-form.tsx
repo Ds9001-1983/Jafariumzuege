@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,12 +32,28 @@ export function LeadForm() {
     register,
     handleSubmit,
     trigger,
+    setValue,
     formState: { errors },
   } = useForm<LeadInput>({
     resolver: zodResolver(leadSchema),
     mode: "onTouched",
     defaultValues: { moveType: "", consent: false },
   });
+
+  // Übernahme der Eingaben aus dem Festpreis-Rechner (#kontakt-Sprung).
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<{ moveType?: string; size?: string; summary?: string }>)
+        .detail;
+      if (!detail) return;
+      if (detail.moveType) setValue("moveType", detail.moveType);
+      if (detail.size) setValue("size", detail.size);
+      if (detail.summary) setValue("message", detail.summary);
+      setStep(1);
+    };
+    window.addEventListener("jafari:prefill", handler);
+    return () => window.removeEventListener("jafari:prefill", handler);
+  }, [setValue]);
 
   const next = async () => {
     const valid = await trigger(stepFields[step]);

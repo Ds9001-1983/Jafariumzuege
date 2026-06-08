@@ -54,6 +54,9 @@ werden müssen (im Code mit `// VERIFY:` markiert):
       die Antworten wurden branchenüblich entworfen (Live-Accordion nicht auslesbar).
 - [ ] **Preise** — `lib/content.ts` › `pricePackages`. Beispiel-Richtwerte (390 €/890 €/individuell);
       echte Preise/Pakete bestätigen.
+- [ ] **Festpreis-Rechner** — `lib/pricing.ts`. Beispiel-Preislogik (Basis nach Größe + Entfernung +
+      Etage + Extras → Spanne). Beträge mit dem Kunden kalibrieren; der Rechner zeigt bewusst nur eine
+      unverbindliche Schätzung.
 - [ ] **Inhaber & Rechtsform** — `lib/business.ts` › `owner`/`legalName` („Erfan Jafari" angenommen).
 - [ ] **Impressum** — `app/impressum/page.tsx`: USt-IdNr. bzw. Kleinunternehmer-Hinweis,
       Gewerbe/Güterkraftverkehrserlaubnis (§ 3 GüKG bei Fahrzeugen > 3,5 t).

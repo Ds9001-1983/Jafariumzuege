@@ -4,11 +4,10 @@ import { Container } from "@/components/site/container";
 import { Eyebrow } from "@/components/site/eyebrow";
 import { SectionHeading } from "@/components/site/section-heading";
 import { HeroBackground } from "@/components/site/hero-background";
-import { CallButton } from "@/components/site/call-button";
-import { WhatsAppButton } from "@/components/site/whatsapp-button";
 import { RatingBadge } from "@/components/site/rating-badge";
+import { Umzugsrechner } from "@/components/site/umzugsrechner";
 import { TrustBar } from "@/components/site/trust-bar";
-import { USPGrid } from "@/components/site/usp-grid";
+import { WhyDifferent } from "@/components/site/why-different";
 import { ServiceGrid } from "@/components/site/service-grid";
 import { WhatsAppCta } from "@/components/site/whatsapp-cta";
 import { FaqSection } from "@/components/site/faq-section";
@@ -16,6 +15,8 @@ import { AreaPills } from "@/components/site/area-list";
 import { TestimonialMarquee } from "@/components/site/testimonials";
 import { ContactSection } from "@/components/site/contact-section";
 import { CtaBand } from "@/components/site/cta-band";
+import { CallButton } from "@/components/site/call-button";
+import { WhatsAppButton } from "@/components/site/whatsapp-button";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { SplitReveal } from "@/components/anim/split-reveal";
@@ -24,51 +25,43 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { faqSchema } from "@/lib/seo/schema";
 import { services, steps, faqs } from "@/lib/content";
 
-const heroProofs = [
-  "Festpreisgarantie",
-  "Versichert bis 2 Mio. €",
-  "Pünktlich garantiert",
-  "10+ Jahre Erfahrung",
-];
+const heroProofs = ["Festpreisgarantie", "Versichert bis 2 Mio. €", "Pünktlich garantiert"];
 
 export default function HomePage() {
   return (
     <>
       <JsonLd data={faqSchema(faqs)} />
 
-      {/* ---------------- HERO ---------------- */}
+      {/* ---------------- HERO (split: Story + Festpreis-Rechner) ---------------- */}
       <section className="relative flex min-h-svh items-center overflow-hidden">
         <HeroBackground
           src="/images/jafari-team-truck.png"
           alt="Jafari Umzug & Transportservice – Team mit Umzugswagen in Cloppenburg"
         />
-        <Container className="relative z-10 pb-24 pt-32 lg:pt-36">
-          <div className="max-w-2xl">
+        <Container className="relative z-10 grid items-center gap-10 pb-20 pt-32 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:pt-36">
+          <div className="max-w-xl">
             <Eyebrow tone="light" className="mb-5">
-              Jafari Umzug &amp; Transportservice · Cloppenburg
+              Umzugsunternehmen · Cloppenburg &amp; Oldenburger Münsterland
             </Eyebrow>
-            <h1 className="font-display text-[clamp(2.4rem,7vw,4.6rem)] font-bold leading-[1.03] text-white">
-              <SplitReveal as="span" text="Ihr Umzug in Cloppenburg" trigger="load" className="block" />
+            <h1 className="font-display text-[clamp(2.4rem,6.5vw,4.4rem)] font-bold leading-[1.03] text-white">
+              <SplitReveal as="span" text="Ihr Umzug zum Festpreis." trigger="load" className="block" />
               <SplitReveal
                 as="span"
-                text="Schnell. Sicher. Zuverlässig."
+                text="In 60 Sekunden berechnet."
                 trigger="load"
                 delay={0.28}
                 className="block text-accent-glow"
               />
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/80 sm:text-xl">
-              Wir kümmern uns um Ihren Umzug – von der Planung bis zur letzten Kiste. Professionell,
-              pünktlich und zu fairen Preisen.
+            <p className="mt-6 max-w-lg text-lg text-white/80 sm:text-xl">
+              Privatumzug, Firmenumzug &amp; Transport – versichert bis 2 Mio. €, pünktlich und ohne
+              versteckte Kosten. Sagen Sie uns kurz, was ansteht, und Sie sehen sofort Ihren
+              Richtpreis.
             </p>
             <div className="mt-7">
               <RatingBadge tone="light" />
             </div>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <CallButton size="xl" />
-              <WhatsAppButton variant="whatsapp" size="xl" />
-            </div>
-            <ul className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2.5 text-sm text-white/75">
+            <ul className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2.5 text-sm text-white/75">
               {heroProofs.map((p) => (
                 <li key={p} className="flex items-center gap-2">
                   <Check className="size-4 text-accent-glow" />
@@ -77,31 +70,50 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
+
+          {/* Festpreis-Rechner – der zentrale Conversion-Motor */}
+          <Umzugsrechner />
         </Container>
       </section>
 
-      {/* ---------------- TRUSTBAR (überlappt Hero) ---------------- */}
+      {/* ---------------- PROOF-BAND (überlappt Hero) ---------------- */}
       <Container className="relative z-20 -mt-12 sm:-mt-16">
         <TrustBar />
       </Container>
 
-      {/* ---------------- WARUM JAFARI (Trust-Faktoren) ---------------- */}
-      <section className="bg-ink py-20 text-white lg:py-28">
+      {/* ---------------- SO MACHT JAFARI ES ANDERS ---------------- */}
+      <WhyDifferent />
+
+      {/* ---------------- ABLAUF ---------------- */}
+      <section id="ablauf" className="scroll-mt-24 bg-paper-dim py-20 lg:py-28">
         <Container>
           <SectionHeading
-            tone="light"
             align="center"
-            eyebrow="Warum Jafari"
-            title="Ihr verlässlicher Partner für jeden Umzug"
-            sub="Mit erfahrenem Team und modernem Equipment sorgen wir dafür, dass Ihr Umzug reibungslos und stressfrei verläuft."
+            eyebrow="So einfach geht's"
+            title="In vier Schritten zum stressfreien Umzug"
+            sub="Strukturiert, transparent und zuverlässig – Sie wissen jederzeit, was als Nächstes passiert."
           />
-          <div className="mt-14">
-            <USPGrid />
-          </div>
+          <Reveal as="ol" stagger={0.1} className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <li
+                key={s.title}
+                className="flex flex-col gap-3 rounded-card border border-line bg-white p-6 shadow-soft"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="grid size-11 place-items-center rounded-xl bg-accent text-white">
+                    <Icon name={s.icon} className="size-5" />
+                  </span>
+                  <span className="font-display text-4xl font-bold text-accent/15">{i + 1}</span>
+                </div>
+                <h3 className="font-display text-lg font-semibold text-ink">{s.title}</h3>
+                <p className="text-sm leading-relaxed text-muted">{s.text}</p>
+              </li>
+            ))}
+          </Reveal>
         </Container>
       </section>
 
-      {/* ---------------- LEISTUNGEN-TEASER ---------------- */}
+      {/* ---------------- LEISTUNGEN ---------------- */}
       <section id="leistungen" className="scroll-mt-24 py-20 lg:py-28">
         <Container>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -121,51 +133,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ---------------- ABLAUF ---------------- */}
-      <section id="ablauf" className="scroll-mt-24 bg-paper-dim py-20 lg:py-28">
-        <Container>
-          <SectionHeading
-            align="center"
-            eyebrow="So funktioniert's"
-            title="So einfach läuft Ihr Umzug ab"
-            sub="Strukturiert, transparent und zuverlässig – in vier klaren Schritten zu Ihrem stressfreien Umzug."
-          />
-          <Reveal as="ol" stagger={0.1} className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <li
-                key={s.title}
-                className="flex flex-col gap-3 rounded-card border border-line bg-white p-6 shadow-soft"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="grid size-11 place-items-center rounded-xl bg-accent text-white">
-                    <Icon name={s.icon} className="size-5" />
-                  </span>
-                  <span className="font-display text-4xl font-bold text-accent/15">{i + 1}</span>
-                </div>
-                <h3 className="font-display text-lg font-semibold text-ink">{s.title}</h3>
-                <p className="text-sm leading-relaxed text-muted">{s.text}</p>
-              </li>
-            ))}
-          </Reveal>
-          <div className="mt-12 flex flex-col items-center gap-4 text-center">
-            <p className="font-display text-xl font-semibold text-ink">
-              Fertig – zuverlässig, strukturiert und ohne unnötigen Aufwand.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <CallButton />
-              <Button asChild variant="outline" size="lg">
-                <Link href="/#kontakt">
-                  Online Anfrage stellen
-                  <ArrowRight className="size-5" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
-
       {/* ---------------- BEWERTUNGEN ---------------- */}
-      <section className="py-20 lg:py-28">
+      <section className="bg-paper-dim py-20 lg:py-28">
         <Container>
           <SectionHeading
             align="center"
@@ -182,7 +151,7 @@ export default function HomePage() {
       </section>
 
       {/* ---------------- EINSATZGEBIETE ---------------- */}
-      <section id="einsatzgebiete" className="scroll-mt-24 bg-paper-dim py-20 lg:py-28">
+      <section id="einsatzgebiete" className="scroll-mt-24 py-20 lg:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
           <div className="flex flex-col gap-6">
             <SectionHeading
@@ -223,7 +192,7 @@ export default function HomePage() {
       {/* ---------------- FINAL CTA ---------------- */}
       <CtaBand
         title="Bereit für einen stressfreien Umzug?"
-        sub="Schnell. Sicher. Zuverlässig. – Ein Anruf genügt, und wir kümmern uns um den Rest."
+        sub="Schnell. Sicher. Zuverlässig. – Berechnen Sie Ihren Richtpreis oder rufen Sie direkt an."
       />
     </>
   );
