@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-/** Auswählbare Umzugsarten (= Leistungen). */
+/** Auswählbare Umzugsarten (= Leistungen, inkl. Zusatzleistungen der Altseite/GBP). */
 export const moveTypes = [
   "Privatumzug",
   "Firmenumzug",
@@ -8,6 +8,10 @@ export const moveTypes = [
   "Nationaler Transport",
   "Entrümpelung",
   "Transportservice",
+  "Möbelmontage / -demontage",
+  "Verpackungsservice",
+  "Einlagerung",
+  "Kurier- / Eiltransport",
 ] as const;
 
 /**
@@ -27,8 +31,9 @@ export const leadSchema = z.object({
   consent: z
     .boolean()
     .refine((v) => v === true, { message: "Bitte stimmen Sie der Datenschutzerklärung zu." }),
-  // Honeypot – muss leer bleiben (Spam-Schutz).
-  website: z.string().max(0).optional(),
+  // Honeypot – ausgefülltes Feld wird in der API still verworfen (Spam-Schutz).
+  // Bewusst ohne max(0): sonst bekämen Bots einen 400 statt des Fake-Erfolgs.
+  website: z.string().optional(),
 });
 
 export type LeadInput = z.infer<typeof leadSchema>;

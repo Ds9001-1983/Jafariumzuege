@@ -8,6 +8,7 @@ import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { StickyCallBar } from "@/components/site/sticky-call-bar";
+import { WhatsAppBubble } from "@/components/site/whatsapp-bubble";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -43,7 +44,9 @@ export const metadata: Metadata = {
     title: "Jafari Umzug & Transportservice – Cloppenburg",
     description: "Versicherter Umzug zum Festpreis. Schnell. Sicher. Zuverlässig. Jetzt anfragen.",
   },
-  robots: { index: true, follow: true },
+  // Prototyp: nicht indexieren (Canonical zeigt auf die Live-Altseite).
+  // VOR LAUNCH auf { index: true, follow: true } stellen + Header in vercel.json entfernen.
+  robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
@@ -65,6 +68,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <SiteFooter />
           <StickyCallBar />
+          <WhatsAppBubble />
         </SmoothScroll>
       </body>
     </html>

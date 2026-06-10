@@ -19,7 +19,7 @@ export function AboutJafari() {
   return (
     <section id="ueber-uns" className="scroll-mt-24 py-20 lg:py-28">
       <Container className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
-        {/* Foto mit überlappendem Siegel */}
+        {/* Foto mit überlappendem Siegel + Original-Logo als Marken-Stempel */}
         <div className="relative">
           <div className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem]">
             <SmartImage
@@ -32,6 +32,18 @@ export function AboutJafari() {
             <div className="absolute inset-0 bg-gradient-to-t from-ink/35 to-transparent" />
           </div>
           <GuaranteeSeal className="absolute -bottom-6 right-4 sm:-right-6" />
+          {/* Original-Logo des Betriebs (Social-Icon-Zeile weggecroppt) */}
+          <div className="absolute -top-5 left-4 w-36 -rotate-2 overflow-hidden rounded-xl border border-line bg-white p-1.5 shadow-lift sm:-left-5 sm:w-44">
+            <div className="relative aspect-[15/8] overflow-hidden rounded-lg">
+              <SmartImage
+                src="/images/jafari-logo.jpg"
+                alt="Original-Logo von Jafari Umzug & Transportservice"
+                fill
+                sizes="176px"
+                className="object-cover object-top"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Text */}

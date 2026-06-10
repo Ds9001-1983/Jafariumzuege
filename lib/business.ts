@@ -42,8 +42,8 @@ export const business = {
     country: "DE",
   },
 
-  // VERIFY: exakte Geo-Koordinaten der Adresse geocoden (Näherung Cloppenburg).
-  geo: { lat: 52.8478, lng: 8.0445 },
+  // Exakte Koordinaten des Google-Business-Profils (Wallfahrtsweg 6).
+  geo: { lat: 52.8574116, lng: 8.046786 },
 
   hours: "Mo–Sa 8:00–18:00 Uhr",
   openingDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -53,16 +53,23 @@ export const business = {
   experienceYears: 10,
   insurance: "Vollkasko-versichert bis 2 Mio. €",
 
-  // VERIFY: Echtheit prüfen + ob aggregateRating im Schema erlaubt ist (Google-Policy).
+  // Google-Business-Profil verifiziert (Stand 06/2026): Wert via Trustlocal-Spiegel
+  // der Google-Rezensionen. VERIFY: exakten Stand (Wert/Anzahl) vor Launch im
+  // Profil gegenprüfen — Bewertungsanzahl wächst laufend.
   rating: {
-    value: 5.0,
-    count: 14,
-    source: "Trustindex",
-    isPlaceholder: true,
+    value: 4.9,
+    count: 30,
+    source: "Google",
+    isPlaceholder: false,
   },
 
-  // VERIFY: echte Google-Bewertungs-URL eintragen (Online-Präsenz im Lead war leer).
-  googleReviewUrl: "",
+  // Google-Business-Profil: "Jafari Umzug & Transportservice", Wallfahrtsweg 6,
+  // 49661 Cloppenburg (Place-ID verifiziert über Google Maps, 06/2026).
+  googlePlaceId: "ChIJEZfha6MVt0cRW8gJ1-Una24",
+  googleMapsUrl:
+    "https://www.google.com/maps/place/?q=place_id:ChIJEZfha6MVt0cRW8gJ1-Una24",
+  googleReviewUrl:
+    "https://search.google.com/local/writereview?placeid=ChIJEZfha6MVt0cRW8gJ1-Una24",
 
   social: {
     instagram: "https://instagram.com/jafari_umzug",

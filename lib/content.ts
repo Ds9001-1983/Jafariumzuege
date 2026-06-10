@@ -70,7 +70,7 @@ export const services: Service[] = [
       "Transparente Preise",
     ],
     icon: "Truck",
-    image: "/images/jafari-team-truck.png",
+    image: "/images/jafari-team-truck.jpg",
   },
   {
     slug: "entruempelung",
@@ -99,6 +99,40 @@ export const services: Service[] = [
     ],
     icon: "Sofa",
     image: "/images/jafari-team-lift.png",
+  },
+];
+
+export type AdditionalService = { title: string; text: string; icon: string };
+
+/**
+ * Zusatzleistungen ohne eigene Detail-Karte (Quelle: Altseite + Kategorien des
+ * Google-Business-Profils: Kurierdienst, Umzugs- und Lagerservice).
+ */
+export const additionalServices: AdditionalService[] = [
+  {
+    title: "Verpackungsservice",
+    text: "Professionelles Verpacken Ihres Hausrats inkl. Material – sicher bis zur letzten Tasse.",
+    icon: "Package",
+  },
+  {
+    title: "Möbelmontage & -demontage",
+    text: "Fachgerechter Ab- und Aufbau Ihrer Möbel – auch Küchen und Schranksysteme.",
+    icon: "Wrench",
+  },
+  {
+    title: "Einlagerung",
+    text: "Sichere Zwischenlagerung Ihres Umzugsguts – flexibel, trocken und versichert.",
+    icon: "Warehouse",
+  },
+  {
+    title: "Kurier- & Eiltransporte",
+    text: "Schnelle Einzeltransporte, wenn es eilig ist – regional und deutschlandweit.",
+    icon: "Zap",
+  },
+  {
+    title: "Aktenvernichtung",
+    text: "Datenschutzkonforme Vernichtung von Akten bei Firmenumzügen und Auflösungen.",
+    icon: "FileX2",
   },
 ];
 
@@ -142,11 +176,15 @@ export type TrustItem = {
   suffix?: string;
 };
 
+// VERIFY: "1000+ Umzüge" ist eine Schätzung (bei 10+ Jahren plausibel) und
+// "24h Antwortzeit" ein an mehreren Stellen wiederholtes Versprechen — beides
+// im Termin vom Kunden bestätigen lassen. "99 %" + "10+ Jahre" stammen von der
+// Altseite; die Google-Bewertung (4,9/5) ist verifiziert (lib/business.ts).
 export const trustItems: TrustItem[] = [
   { icon: "Truck", value: "1000+", label: "Erfolgreiche Umzüge", countTo: 1000, suffix: "+" },
-  { icon: "Heart", value: "99 %", label: "Kundenzufriedenheit", countTo: 99, suffix: " %" },
+  { icon: "Star", value: "4,9/5", label: "Google-Bewertung" },
   { icon: "Award", value: "10+ Jahre", label: "Erfahrung", countTo: 10, suffix: "+ Jahre" },
-  { icon: "Clock", value: "24h", label: "Antwortzeit" },
+  { icon: "Heart", value: "99 %", label: "Kundenzufriedenheit", countTo: 99, suffix: " %" },
 ];
 
 export type Step = { icon: string; title: string; text: string };
@@ -214,8 +252,8 @@ export type Testimonial = {
   isPlaceholder?: boolean;
 };
 
-// VERIFY: Bewertungen wörtlich von der Website (Trustindex) übernommen.
-// Echtheit/Quelle vor Launch bestätigen (siehe README).
+// Bewertungen wörtlich von der Altseite übernommen; deren Trustindex-Widget
+// spiegelt die Google-Rezensionen (Profil verifiziert, siehe lib/business.ts).
 export const testimonials: Testimonial[] = [
   {
     name: "Laura Fischer",

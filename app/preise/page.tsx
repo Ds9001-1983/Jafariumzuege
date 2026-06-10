@@ -154,7 +154,10 @@ export default function PreisePage() {
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <CallButton />
-            <WhatsAppButton variant="whatsapp" />
+            <WhatsAppButton
+              variant="whatsapp"
+              message="Hallo, ich möchte ein Festpreis-Angebot – ich sende gleich Fotos meiner Räume."
+            />
           </div>
         </Container>
       </section>

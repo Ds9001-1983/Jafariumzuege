@@ -14,6 +14,7 @@ import { WhatsAppCta } from "@/components/site/whatsapp-cta";
 import { FaqSection } from "@/components/site/faq-section";
 import { AreaPills } from "@/components/site/area-list";
 import { TestimonialMarquee } from "@/components/site/testimonials";
+import { GoogleReviewCta } from "@/components/site/google-review-cta";
 import { ContactSection } from "@/components/site/contact-section";
 import { CtaBand } from "@/components/site/cta-band";
 import { CallButton } from "@/components/site/call-button";
@@ -35,7 +36,7 @@ export default function HomePage() {
       {/* ---------------- HERO (split: Story + Festpreis-Rechner) ---------------- */}
       <section className="relative flex min-h-svh items-center overflow-hidden">
         <HeroBackground
-          src="/images/jafari-team-truck.png"
+          src="/images/jafari-team-truck.jpg"
           alt="Jafari Umzug & Transportservice – Team mit Umzugswagen in Cloppenburg"
         />
         <Container className="relative z-10 grid items-center gap-10 pb-20 pt-32 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:pt-36">
@@ -47,7 +48,7 @@ export default function HomePage() {
               <SplitReveal as="span" text="Ihr Umzug zum Festpreis." trigger="load" className="block" />
               <SplitReveal
                 as="span"
-                text="In 60 Sekunden berechnet."
+                text="Richtpreis in 60 Sekunden."
                 trigger="load"
                 delay={0.28}
                 className="block text-accent-glow"
@@ -69,6 +70,16 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
+            {/* Mobil liegt der Rechner unter dem Fold — direkter Weg dorthin + WhatsApp. */}
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:hidden">
+              <Button asChild variant="signal" size="lg">
+                <Link href="/#rechner">
+                  Richtpreis in 60 Sek. berechnen
+                  <ArrowRight className="size-5" />
+                </Link>
+              </Button>
+              <WhatsAppButton variant="whatsapp" />
+            </div>
           </div>
 
           {/* Festpreis-Rechner – der zentrale Conversion-Motor */}
@@ -172,6 +183,9 @@ export default function HomePage() {
         <div className="mt-12">
           <TestimonialMarquee />
         </div>
+        <Container className="mt-12">
+          <GoogleReviewCta />
+        </Container>
         <Container className="mt-12 flex flex-col items-center gap-4 text-center">
           <p className="font-display text-xl font-semibold text-ink">
             Werden Sie unser nächster zufriedener Kunde.
@@ -179,7 +193,7 @@ export default function HomePage() {
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="signal" size="lg">
               <Link href="/#rechner">
-                Festpreis berechnen
+                Richtpreis berechnen
                 <ArrowRight className="size-5" />
               </Link>
             </Button>

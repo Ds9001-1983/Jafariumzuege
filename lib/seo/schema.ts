@@ -1,6 +1,6 @@
 import { business, SITE_URL } from "@/lib/business";
 import { serviceCities, serviceRegions } from "@/lib/locations";
-import { services, type Faq } from "@/lib/content";
+import { services, additionalServices, type Faq } from "@/lib/content";
 
 const BUSINESS_ID = `${SITE_URL}/#business`;
 
@@ -44,10 +44,11 @@ export function movingCompanySchema() {
         closes: business.closes,
       },
     ],
+    hasMap: business.googleMapsUrl,
     sameAs: [
       business.social.instagram,
       business.social.facebook,
-      ...(business.googleReviewUrl ? [business.googleReviewUrl] : []),
+      business.googleMapsUrl,
     ],
     areaServed: [
       ...serviceCities.map((name) => ({ "@type": "City", name })),
@@ -56,13 +57,19 @@ export function movingCompanySchema() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Umzugs- & Transportleistungen",
-      itemListElement: services.map((s) => ({
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: s.title, description: s.short },
-      })),
+      itemListElement: [
+        ...services.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s.title, description: s.short },
+        })),
+        ...additionalServices.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s.title, description: s.text },
+        })),
+      ],
     },
-    // VERIFY: aggregateRating erst mit ECHTEN, belegbaren Bewertungen ergänzen
-    // (Googles Review-Snippet-Policy verbietet nicht belegte Bewertungen).
+    // Bewusst KEIN aggregateRating: Google wertet von Google selbst stammende
+    // Bewertungen im eigenen Markup als "self-serving" und ignoriert sie.
   };
 }
 

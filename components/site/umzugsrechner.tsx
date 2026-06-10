@@ -42,19 +42,25 @@ export function Umzugsrechner() {
   const toggleAddon = (id: string) =>
     setAddons((prev) => (prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id]));
 
-  const handleRequest = () => {
-    const sizeLabel = find(sizeOptions, size).label;
-    const distanceLabel = find(distanceOptions, distance).label;
-    const accessLabel = find(accessOptions, access).label;
+  // Eingaben + Richtpreis als Text — wandert mit ins Lead-Formular UND in den
+  // WhatsApp-Chat, damit die Anfrage beim Betrieb fertig qualifiziert ankommt.
+  const summary = useMemo(() => {
     const addonLabels = addons.map((id) => find(addonOptions, id).label);
-    const summary =
-      `Festpreis-Rechner: ${sizeLabel} · ${distanceLabel} · ${accessLabel}` +
+    return (
+      `Festpreis-Rechner: ${find(sizeOptions, size).label} · ${find(distanceOptions, distance).label} · ${find(accessOptions, access).label}` +
       (addonLabels.length ? ` · Extras: ${addonLabels.join(", ")}` : "") +
-      `. Geschätzter Richtpreis: ca. ${euro(range.low)} – ${euro(range.high)}.`;
+      `. Geschätzter Richtpreis: ca. ${euro(range.low)} – ${euro(range.high)}.`
+    );
+  }, [size, distance, access, addons, range]);
 
+  const whatsappHref = `${business.whatsapp.href}?text=${encodeURIComponent(
+    `Hallo, ich habe gerade Ihren Rechner genutzt. ${summary} Bitte um ein verbindliches Angebot.`,
+  )}`;
+
+  const handleRequest = () => {
     window.dispatchEvent(
       new CustomEvent("jafari:prefill", {
-        detail: { moveType: "Privatumzug", size: sizeLabel, summary },
+        detail: { moveType: "Privatumzug", size: find(sizeOptions, size).label, summary },
       }),
     );
     document.getElementById("kontakt")?.scrollIntoView({ behavior: "smooth" });
@@ -112,7 +118,8 @@ export function Umzugsrechner() {
           ca. {euro(range.low)} – {euro(range.high)}
         </span>
         <span className="text-xs leading-relaxed text-muted">
-          Unverbindliche Schätzung. Ihr exakter Festpreis folgt nach der kostenlosen Besichtigung.
+          Unverbindliche Schätzung auf Basis von Richtwerten. Ihr exakter Festpreis folgt nach der
+          kostenlosen Besichtigung.
         </span>
       </div>
 
@@ -136,7 +143,7 @@ export function Umzugsrechner() {
         </a>
         <span aria-hidden="true" className="text-line">|</span>
         <a
-          href={business.whatsapp.hrefPrefilled}
+          href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 font-medium text-ink transition-colors hover:text-whatsapp-deep"

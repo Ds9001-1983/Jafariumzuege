@@ -38,10 +38,12 @@ npm run lint
 
 ## Bilder
 
-Die echten Fotos der bestehenden Seite wurden 1:1 übernommen (`/public/images/jafari-*.png`,
-`customer-phone-call.jpg`). Das **Original-Logo** liegt unter `/public/images/jafari-logo.jpg` und
-ist als Marken-Referenz erhalten; Header/Footer nutzen eine refinierte Wortmarke in den exakten
-Logo-Farben (Navy + Orange).
+Die echten Fotos der bestehenden Seite wurden übernommen (`/public/images/jafari-*.png`,
+`customer-phone-call.jpg`). Das **Hero-Bild** (`jafari-team-truck.jpg`) wurde per KI-Retusche
+korrigiert (Fake-Telefonnummer „030-JAFAR…" von der Beifahrertür entfernt, Kennzeichen auf
+CLP geändert) und auf 2560×1920 hochskaliert. Das **Original-Logo** liegt unter
+`/public/images/jafari-logo.jpg`, wird in der Über-uns-Sektion gezeigt und dient als Referenz
+für die Wortmarke in Header/Footer (Navy + Orange + Swoosh).
 
 ---
 
@@ -60,13 +62,17 @@ werden müssen (im Code mit `// VERIFY:` markiert):
 - [ ] **Inhaber & Rechtsform** — `lib/business.ts` › `owner`/`legalName` („Erfan Jafari" angenommen).
 - [ ] **Impressum** — `app/impressum/page.tsx`: USt-IdNr. bzw. Kleinunternehmer-Hinweis,
       Gewerbe/Güterkraftverkehrserlaubnis (§ 3 GüKG bei Fahrzeugen > 3,5 t).
-- [ ] **Geo-Koordinaten** — `lib/business.ts` › `geo` (Näherung Cloppenburg) exakt geocoden.
-- [ ] **Bewertung 5,0/14 (Trustindex)** — `lib/business.ts` › `rating`. Echtheit prüfen; ein
-      `aggregateRating` im JSON-LD nur mit belegbaren Werten ergänzen (Google-Policy).
-- [ ] **Google-Bewertungs-URL** — `lib/business.ts` › `googleReviewUrl` (aktuell leer).
-- [ ] **Testimonials** — `lib/content.ts` › `testimonials`. Von der Website übernommen, Echtheit
-      bestätigen.
+- [x] **Geo-Koordinaten** — exakt vom Google-Business-Profil übernommen (52.8574116, 8.046786).
+- [x] **Google-Business-Profil verifiziert** (06/2026): Place-ID `ChIJEZfha6MVt0cRW8gJ1-Una24`,
+      ~4,9/5 bei ~30 Bewertungen (via Trustlocal-Spiegel). Review- und Maps-Link in
+      `lib/business.ts`. ⚠️ Exakten Bewertungsstand vor Launch im Profil gegenprüfen.
+- [ ] **Testimonials** — `lib/content.ts` › `testimonials`. Von der Website übernommen (Trustindex
+      spiegelt Google-Rezensionen), Echtheit bestätigen.
 - [ ] **Finale Domain** — `lib/business.ts` › `SITE_URL`.
+- [ ] **noindex entfernen vor Launch** — `app/layout.tsx` › `robots` UND `vercel.json` ›
+      `X-Robots-Tag`-Header (Prototyp ist bewusst auf noindex, damit die Demo nicht in Google
+      landet, solange das Canonical auf die Altseiten-Domain zeigt).
+- [ ] **Trust-Zahl „1000+ Umzüge"** — `lib/content.ts` › `trustItems` (Schätzung, bestätigen).
 - [ ] **Logo** — entweder Wortmarke beibehalten oder das Original-Logo final einbinden.
 - [ ] **Mailversand** — `LEAD_FORWARD_URL` oder echten Versand (z. B. Resend) konfigurieren.
 

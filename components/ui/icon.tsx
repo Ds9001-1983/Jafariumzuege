@@ -32,6 +32,11 @@ import {
   PackageCheck,
   Route,
   CalendarCheck,
+  Package,
+  Wrench,
+  Warehouse,
+  Zap,
+  FileX2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -69,6 +74,11 @@ const map = {
   PackageCheck,
   Route,
   CalendarCheck,
+  Package,
+  Wrench,
+  Warehouse,
+  Zap,
+  FileX2,
 } satisfies Record<string, LucideIcon>;
 
 export type IconName = keyof typeof map;

@@ -89,7 +89,10 @@ export function LeadForm() {
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <CallButton showNumber={false} />
-          <WhatsAppButton variant="whatsapp" />
+          <WhatsAppButton
+            variant="whatsapp"
+            message="Hallo, ich habe gerade eine Anfrage über Ihre Website gesendet."
+          />
         </div>
       </div>
     );

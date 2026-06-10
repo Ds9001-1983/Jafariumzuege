@@ -3,12 +3,14 @@ import { Phone, Mail, MapPin, Clock, Check } from "lucide-react";
 import { Logo } from "./logo";
 import { CallButton } from "./call-button";
 import { WhatsAppButton } from "./whatsapp-button";
+import { GoogleG } from "./rating-badge";
 import { business, fullAddress } from "@/lib/business";
 import { services } from "@/lib/content";
 
 const navLinks = [
   { href: "/leistungen", label: "Leistungen" },
   { href: "/preise", label: "Preise" },
+  { href: "/#ueber-uns", label: "Über uns" },
   { href: "/#ablauf", label: "Ablauf" },
   { href: "/#einsatzgebiete", label: "Einsatzgebiete" },
   { href: "/#kontakt", label: "Kontakt" },
@@ -78,6 +80,15 @@ export function SiteFooter() {
                   className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
                 >
                   <FbIcon />
+                </a>
+                <a
+                  href={business.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Jafari auf Google Maps – Bewertungen ansehen"
+                  className="grid size-10 place-items-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+                >
+                  <GoogleG className="size-5" />
                 </a>
               </div>
             </div>

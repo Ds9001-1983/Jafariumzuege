@@ -13,13 +13,13 @@ import { SmartImage } from "@/components/ui/smart-image";
 import { Reveal } from "@/components/anim/reveal";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
-import { services, faqs } from "@/lib/content";
+import { services, additionalServices, faqs } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Leistungen – Privatumzug, Firmenumzug, Haushaltsauflösung & Transport",
   description:
-    "Alle Leistungen von Jafari Umzug & Transportservice: Privatumzug, Firmenumzug, Haushaltsauflösung, nationale Transporte, Entrümpelung und Transportservice – versichert und zum Festpreis.",
+    "Alle Leistungen von Jafari Umzug & Transportservice: Privatumzug, Firmenumzug, Haushaltsauflösung, nationale Transporte, Entrümpelung, Transportservice, Verpackungsservice, Möbelmontage, Einlagerung und Kuriertransporte – versichert und zum Festpreis.",
   alternates: { canonical: "/leistungen" },
 };
 
@@ -97,6 +97,32 @@ export default function LeistungenPage() {
               </div>
             );
           })}
+        </Container>
+      </section>
+
+      {/* Zusatzleistungen (Altseite + Google-Kategorien) als kompakte Karten */}
+      <section className="pb-20 lg:pb-28">
+        <Container>
+          <SectionHeading
+            align="center"
+            eyebrow="Darüber hinaus"
+            title="Weitere Leistungen"
+            sub="Auch das übernehmen wir für Sie – einzeln buchbar oder als Teil Ihres Umzugs."
+          />
+          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {additionalServices.map((s) => (
+              <li
+                key={s.title}
+                className="flex flex-col gap-3 rounded-card border border-line bg-white p-6 shadow-soft"
+              >
+                <span className="grid size-11 place-items-center rounded-xl bg-accent/10 text-accent">
+                  <Icon name={s.icon} className="size-5" />
+                </span>
+                <h3 className="font-display text-lg font-semibold text-ink">{s.title}</h3>
+                <p className="text-sm leading-relaxed text-muted">{s.text}</p>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 

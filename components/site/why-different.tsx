@@ -50,7 +50,7 @@ export function WhyDifferent() {
             </p>
             <Button asChild variant="signal" size="lg" className="self-start">
               <Link href="/#rechner">
-                Festpreis berechnen
+                Richtpreis berechnen
                 <ArrowRight className="size-5" />
               </Link>
             </Button>
